@@ -107,6 +107,16 @@ Ext.onReady(function () {
                                     leaf: true
                                 }
                             ]
+                        },
+                        {
+                            text:'ee',
+                            expanded: true,
+                            children: [
+                                {
+                                    text: 'ff',
+                                    leaf: true
+                                }
+                            ]
                         }
                     ]
                 },
@@ -127,6 +137,16 @@ Ext.onReady(function () {
                                     leaf: true
                                 }
                             ]
+                        },
+                        {
+                            text:'bs',
+                            expanded: true,
+                            children: [
+                                {
+                                    text: 'zz',
+                                    leaf: true
+                                }
+                            ]
                         }
                     ]
                 }
@@ -134,23 +154,30 @@ Ext.onReady(function () {
         }
     });
 
-    searchText = "yan";
+    searchText = "hu";
+    sonText = "ee";
     store.filterBy( function(node) {
 
         var keys = node.fields.keys;
 
-        console.log(node.data.parentId);
-        console.log(node.data.children);
-        if(node.data.depth == 3){
-            console.log(node.data.data);
-        }else {
-            console.log("okkkk")
-        }
+        // console.log(node.data.parentId);
+        // console.log(node.data.children);
+
+
+
 
         for( var i=0; i < keys.length; i++ ) {
             var value = node.get( keys[i] );
             if( value != null ) {
                 if( value.toString().toLowerCase().indexOf( searchText ) !== -1 ) {
+
+
+                    if(sonText){
+                        store.traverseNode(node,sonText,function () {
+                            lens = node.childNodes.length;
+                        })
+
+                    }
                     return true;
                 }
             }
